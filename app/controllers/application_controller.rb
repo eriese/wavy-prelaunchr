@@ -22,8 +22,8 @@ class ApplicationController < ActionController::Base
 			cookies[:h_ref] = h_ref
 		end
 
-		# user_agent = request.env['HTTP_USER_AGENT']
-		# return unless user_agent && !user_agent.include?('facebookexternalhit/1.1')
-		# redirect_to proc { url_for(params) }
+		user_agent = request.env['HTTP_USER_AGENT']
+		return unless user_agent && !user_agent.include?('facebookexternalhit/1.1')
+		redirect_to proc { url_for(params.permit!.except(:ref)) }
 	end
 end
